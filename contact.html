@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title >Contact | አለታ ህዳሴ</title>
+<script src="./site-effects.js"></script>
+<style>
+:root{--navy:#0a1f8f;--orange:#ff7a3d;--sun:#fdc83a;--bg:#f5f6f8;--ink:#1b1b2f;--muted:#5b6280;--line:#dde1ec}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI","Noto Sans Ethiopic",system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden}
+a{color:var(--navy)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.wrap{width:min(1000px,100% - 32px);margin-inline:auto}
+header{background:#fff;border-bottom:2px solid var(--sun)}
+.bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;padding:14px 0}
+.logo{font-size:1.6rem;font-weight:800;color:var(--orange);text-decoration:none}
+nav{display:flex;flex-wrap:wrap;gap:4px 20px}
+nav a{text-decoration:none;color:var(--ink);font-weight:600;padding:6px 0;border-bottom:3px solid transparent}
+nav a:hover{color:var(--navy)}
+nav a[aria-current="page"]{color:var(--navy);border-bottom-color:var(--orange)}
+.hero{background:var(--navy);color:#fff;padding:44px 0}
+.hero h1{margin:0 0 8px;font-size:clamp(2rem,5vw,2.8rem)}
+.hero p{margin:0;color:#d5dcf5;max-width:55ch}
+.layout{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;padding:32px 0 56px;align-items:start}
+.info{display:grid;gap:14px}
+.item{background:#fff;border:1px solid var(--line);border-left:6px solid var(--orange);border-radius:12px;padding:16px 18px}
+.item:nth-child(even){border-left-color:var(--sun)}
+.item b{display:block;color:var(--navy)}
+.item span,.item a{color:var(--muted);text-decoration:none}
+.item a:hover{color:var(--orange)}
+.card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--orange);border-radius:14px;padding:24px}
+form{display:grid;gap:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:grid;gap:6px;font-weight:600;font-size:.92rem}
+input,select,textarea{font:inherit;padding:11px 14px;border:2px solid var(--line);border-radius:10px;width:100%;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--navy);outline:none}
+button{font:inherit;font-weight:700;background:var(--navy);color:#fff;border:0;border-radius:999px;padding:12px 28px;cursor:pointer;justify-self:start}
+button:hover{background:var(--orange)}
+.err{color:#b3261e;font-weight:600;font-size:.9rem;min-height:1.2em;margin:0}
+.note{font-size:.85rem;color:var(--muted);margin:0}
+footer{background:var(--ink);color:#c9d0ea;text-align:center;padding:22px 0;font-size:.9rem}
+@media(max-width:760px){.layout,.row{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><div class="wrap bar">
+  <a class="logo" href="home.html">አለታ-ህዳሴ</a>
+  <nav aria-label="Main">
+    <a href="home.html">Home</a>
+    <a href="announcements.html">Announcement</a>
+    <a href="achievement.html">Achievements</a>
+    <a href="history.html">About</a>
+    <a href="contact.html" aria-current="page">Contact</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <h1>Contact the school office</h1>
+  <p>Call, visit, or send us a message. We reply during office hours.</p>
+</div></div>
+
+<main class="wrap layout">
+  <!-- EDIT THESE DETAILS -->
+  <div class="info">
+    <div class="item"><b>Phone</b><a href="tel:+251000000000">+251 000 000 000</a></div>
+    <div class="item"><b>Email</b><a href="mailto:your-school@example.com">your-school@example.com</a></div>
+    <div class="item"><b>Address</b><span>School name, Shashamane, Oromia</span></div>
+    <div class="item"><b>Office hours</b><span>Monday to Friday, 8:00 AM to 5:00 PM</span></div>
+  </div>
+
+  <div class="card">
+    <form id="f" novalidate>
+      <div class="row">
+        <label>Your name<input id="name" maxlength="60" autocomplete="name"></label>
+        <label>Phone or email<input id="reach" maxlength="80" autocomplete="email"></label>
+      </div>
+      <label>Reason
+        <select id="topic"><option>General question</option><option>Registration</option><option>Report a problem</option><option>Other</option></select>
+      </label>
+      <label>Message<textarea id="msg" rows="5" maxlength="800"></textarea></label>
+      <p class="err" id="err" role="alert"></p>
+      <button type="submit">Send message</button>
+      <p class="note">This opens your email app with the message ready to send.</p>
+    </form>
+  </div>
+</main>
+
+<footer>አለታ ህዳሴ School. All rights reserved.</footer>
+
+<script>
+  const SCHOOL_EMAIL = "your-school@example.com";   // <-- put the real address here
+  const $ = id => document.getElementById(id);
+  $('f').addEventListener('submit', e => {
+    e.preventDefault();
+    const name = $('name').value.trim(), reach = $('reach').value.trim(), msg = $('msg').value.trim();
+    if (!name || !reach || !msg) { $('err').textContent = 'Please fill in your name, how to reach you, and your message.'; return; }
+    $('err').textContent = '';
+    const body = `${msg}\n\nFrom: ${name}\nContact: ${reach}`;
+    location.href = `mailto:${SCHOOL_EMAIL}?subject=${encodeURIComponent($('topic').value)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+</body></html>

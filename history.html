@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="am">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b2436">
+  <meta name="description" content="The story and history of አለታ-ህዳሴ Secondary and Preparatory School in Aleta Wondo, Ethiopia.">
+  <title>Our History | አለታ-ህዳሴ</title>
+  <script src="./site-effects.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abyssinica+SIL&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --navy:#1b2436; --navy-deep:#11192a; --orange:#ff7954; --gold:#efb971; --silver:#b9bac2; --text:#f0eff1; --muted:#d0d0d5; --cream:#555b68; --am:'Abyssinica SIL',serif; --sans:'DM Sans',Arial,sans-serif; --serif:'Playfair Display',Georgia,serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--cream); color:var(--text); font-family:var(--sans); }
+    .topline { height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    header { height:92px; background:var(--navy); color:#f5f5f6; display:flex; align-items:center; border-bottom:1px solid rgba(239,185,113,.58); }
+    .header-inner { width:min(1320px,100%); margin:auto; padding:0 5.2%; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:12px; font:700 30px/1 var(--am); letter-spacing:.01em; }
+    .brand .first { color:var(--orange); } .brand .second { color:var(--silver); }
+    .page-label { color:#e9eaf0; font-size:15px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; border:1px solid rgba(239,185,113,.3); padding:11px 17px; border-radius:2px; }
+    .hero { min-height:570px; display:flex; justify-content:center; align-items:center; padding:68px 28px 82px; position:relative; isolation:isolate; overflow:hidden; text-align:center; color:white; background:linear-gradient(135deg,#535966,#5b616e 54%,#505663); }
+    .hero:before,.hero:after { content:""; position:absolute; z-index:-1; border-radius:50%; filter:blur(1px); }
+    .hero:before { width:560px; height:560px; left:-270px; top:-320px; border:1px solid rgba(255,255,255,.09); box-shadow:0 0 0 45px rgba(255,255,255,.025),0 0 0 90px rgba(255,255,255,.02); }
+    .hero:after { width:480px; height:480px; right:-300px; bottom:-350px; border:1px solid rgba(239,185,113,.16); box-shadow:0 0 0 60px rgba(239,185,113,.025),0 0 0 120px rgba(239,185,113,.02); }
+    .hero-inner { width:min(1120px,100%); }
+    .eyebrow { display:inline-flex; gap:12px; align-items:center; color:#f5c889; text-transform:uppercase; font-size:11px; font-weight:700; letter-spacing:.24em; }
+    .eyebrow:before,.eyebrow:after { content:""; width:33px; height:1px; background:currentColor; opacity:.8; }
+    h1 { margin:28px 0 23px; font:700 clamp(48px,7.2vw,94px)/1.27 var(--am); letter-spacing:.005em; text-shadow:0 3px 16px rgba(14,19,31,.12); }
+    h1 .orange { color:var(--orange); } h1 .silver { color:#c0c0c7; }
+    .hero-copy { max-width:850px; margin:0 auto; color:#f0bd80; font:400 clamp(18px,2.1vw,25px)/1.9 var(--am); }
+    .hero-rule { width:72px; height:2px; background:var(--orange); margin:30px auto 0; }
+    .history { width:100%; margin:0 auto; padding:96px max(34px,calc((100% - 1112px)/2)) 105px; background:#555b68; }
+    .history-grid { display:grid; grid-template-columns:1.04fr .96fr; gap:76px; align-items:center; }
+    .history-photo { min-height:430px; position:relative; overflow:hidden; background:#87948a; box-shadow:18px 18px 0 rgba(27,36,54,.45); }
+    .history-photo img { display:block; width:100%; height:430px; object-fit:cover; transition:transform .7s ease; }
+    .history-photo:hover img { transform:scale(1.035); }
+    .photo-shade { position:absolute; inset:45% 0 0; background:linear-gradient(0deg,rgba(17,25,42,.82),transparent); pointer-events:none; }
+    .photo-credit { position:absolute; bottom:18px; left:20px; right:20px; color:white; font-size:11px; line-height:1.5; }
+    .photo-credit a { text-decoration:underline; text-underline-offset:3px; }
+    .section-kicker { color:#f0bd80; font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
+    h2 { color:#d0d0d5; font:600 clamp(34px,4.3vw,54px)/1.14 var(--serif); letter-spacing:-.025em; margin:15px 0 20px; }
+    .history-copy { color:#f0eff1; font-size:15px; line-height:1.9; }
+    .history-copy p { margin:0 0 16px; }
+    .history-copy .amharic { font:400 18px/1.85 var(--am); color:#f0bd80; }
+    .sample-note { margin-top:23px; padding:14px 16px; border-left:3px solid var(--orange); background:rgba(27,36,54,.58); color:#e0dfe2; font-size:12px; line-height:1.65; }
+    .values { border-top:1px solid rgba(255,255,255,.22); display:grid; grid-template-columns:repeat(3,1fr); margin-top:63px; padding-top:25px; }
+    .value { padding:0 25px; border-left:1px solid rgba(255,255,255,.22); text-align:center; color:#d0d0d5; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; }
+    .value:first-child { border:0; } .value strong { display:block; font:600 20px var(--serif); color:#ff9a79; letter-spacing:0; text-transform:none; margin-bottom:3px; }
+    footer { background:var(--navy-deep); color:#abb2bc; padding:25px 28px; text-align:center; font-size:11px; letter-spacing:.06em; }
+    footer strong { color:#f4f2ee; font:600 16px var(--am); margin-right:8px; }
+    @media(max-width:760px) { header { height:78px; } .header-inner { padding:0 22px; } .brand { font-size:26px; } .page-label { font-size:10px; padding:9px 11px; letter-spacing:.1em; } .hero { min-height:520px; padding:64px 23px; } h1 { font-size:clamp(43px,9vw,68px); } .history { padding:67px 25px 75px; } .history-grid { grid-template-columns:1fr; gap:44px; } .history-photo,.history-photo img { min-height:340px; height:340px; } .values { margin-top:43px; } }
+    @media(max-width:470px) { header { height:72px; } .brand { font-size:23px; gap:8px; } .page-label { padding:8px 9px; font-size:9px; } .hero { min-height:470px; } .hero-copy { font-size:17px; } .history { padding-left:21px; padding-right:25px; } .history-photo,.history-photo img { min-height:270px; height:270px; } .values { grid-template-columns:1fr; gap:15px; } .value { border:0; padding:0; } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; } }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="header-inner">
+      <div class="brand" aria-label="አለታ-ህዳሴ"><span class="first">አለታ</span><span class="second">-ህዳሴ</span></div>
+      <div class="page-label">Our History</div>
+    </div>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-inner">
+        <div class="eyebrow">Our story · Aleta Wondo</div>
+        <h1 id="page-title"><span class="orange">አለታ-ህዳሴ</span><br><span class="silver">የትውልዶች ታሪክ</span></h1>
+        <p class="hero-copy">እውቀት የሚያበራበት፣ ሕልሞች የሚያድጉበት፣ ትውልዶችም የሚገናኙበት ቦታ።<br>የአለታ-ህዳሴ ታሪክ የትምህርት፣ የተስፋ እና የጋራ ጥረት ታሪክ ነው።</p>
+        <div class="hero-rule"></div>
+      </div>
+    </section>
+    <section class="history" aria-labelledby="history-title">
+      <div class="history-grid">
+        <div class="history-photo">
+          <img src="https://www.nuovofioreinafrica.org/immaginiProgetti/nuo_nuove_aule_per_i_ragazzi_del_centro_bekele_blessing_26_0.jpg" alt="An education project in Aleta Wondo, Ethiopia, with classroom buildings and a community green space" loading="lazy">
+          <div class="photo-shade"></div>
+          <div class="photo-credit">A learning project in Aleta Wondo · <a href="https://www.nuovofioreinafrica.org/en/new_classrooms_for_the_children_at_the_bekele_blessing_centre.html" target="_blank" rel="noopener">Photo: Nuovo Fiore in Africa</a> · local reference image</div>
+        </div>
+        <div>
+          <div class="section-kicker">A legacy shaped by learning</div>
+          <h2 id="history-title">A place to learn.<br>A story to carry.</h2>
+          <div class="history-copy">
+            <p class="amharic">አለታ-ህዳሴ የትምህርት ቤት ታሪክ የተማሪዎች፣ የመምህራን እና የማኅበረሰቡ የጋራ ታሪክ ነው። በየትውልዱ ተማሪዎች እውቀትን እየተማሩ፣ ሕልማቸውን እያሳደጉ እና ለወደፊቱ እየተዘጋጁ በዚህ ታሪክ ላይ የራሳቸውን አሻራ አኑረዋል።</p>
+            <p>For generations, አለታ-ህዳሴ Secondary and Preparatory School has been a place where young people come to learn, discover their strengths, and prepare for what comes next. Students, educators, and families have each added something lasting to the life of the school.</p>
+            <p>Every new class begins another chapter: built on curiosity, strengthened by community, and carried forward with hope.</p>
+          </div>
+          <div class="sample-note"><strong>Sample story text:</strong> Replace this introduction with your school’s founding year, important milestones, and the memories you want to share.</div>
+        </div>
+      </div>
+      <div class="values" aria-label="Our school values"><div class="value"><strong>Knowledge</strong>Learning with purpose</div><div class="value"><strong>Community</strong>Growing together</div><div class="value"><strong>Hope</strong>Shaping tomorrow</div></div>
+    </section>
+  </main>
+  <footer><strong>አለታ-ህዳሴ</strong> · Our History · Aleta Wondo, Ethiopia</footer>
+</body>
+</html>

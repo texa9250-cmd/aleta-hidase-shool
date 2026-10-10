@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student stories | አለታ ህዳሴ Grade 12 Prep</title><script src="../site-effects.js"></script><link rel="stylesheet" href="css/portal.css"></head>
+<body data-page="stories"><div id="site-header"></div>
+<div class="pagehead"><div class="wrap"><h1>Student stories</h1><p>What worked for students who sat the exam before you.</p></div></div><main>
+<div class="wrap">
+  <div class="formcard"><h2 style="font-size:1.3rem;margin-bottom:14px">Share your experience</h2>
+    <form id="story-form">
+      <div class="row2"><label>Your name (optional)<input id="f-name" maxlength="40"></label>
+      <label>Subject<select id="f-subject"></select></label></div>
+      <label>Title<input id="f-title" required maxlength="80" placeholder="What is your advice in one line?"></label>
+      <label>Your story<textarea id="f-text" required rows="4" maxlength="800" placeholder="How did you study? What would you do differently?"></textarea></label>
+      <button class="btn" type="submit" style="margin:0">Share story</button>
+      <p class="note">Stories you add are saved in this browser only. To show them to every student, add them to STORIES in js/data.js.</p>
+      <p class="ok" id="story-msg" role="status"></p>
+    </form></div>
+  <div id="list" class="grid"></div></div></main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script><script src="js/app.js"></script></body></html>

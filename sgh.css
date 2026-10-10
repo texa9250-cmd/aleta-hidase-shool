@@ -1,0 +1,655 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body{
+    font-family: Arial, "Noto Sans Ethiopic", sans-serif;
+    background-color: #0f172a;
+    color: whitesmoke;
+    line-height: 1.7;
+}
+main{
+    background-color: whitesmoke;
+}
+html {
+      scroll-behavior: smooth;
+    }
+    
+
+.hero {
+      min-height: 480px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)),
+        url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+    }
+
+.hero-content {
+      width: min(800px, 92%);
+      padding: 4rem 0;
+    }
+
+.hero h1 {
+      font-size: clamp(2.1rem, 6vw, 4.5rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+.hero p {
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem;
+    }
+
+
+
+
+
+
+
+nav{
+    width: 100%;
+    padding: 1rem 5%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid burlywood;
+    backdrop-filter: blur(15px);
+    margin-bottom: 2rem;
+     position: sticky;
+      top: 0;
+      z-index: 100;
+
+     min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+}
+
+.nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+.button {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+    
+.button:hover {
+      transform: translateY(-2px);
+      text-shadow: 0 0 10px #38bdf8;
+
+    }
+    
+
+.icon-button{
+      border: 1px solid #64748b;
+      background: transparent;
+      color: white;
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      min-width: 42px;
+      min-height: 42px;
+    }
+
+
+[data-theme="dark"] {
+      --background: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --border: #475569;
+      --secondary: #020617;
+    }
+.logo{
+    
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: coral;
+    letter-spacing: 1px;
+    margin-right: auto;
+    
+}
+
+.nav-links{
+    list-style: none;
+    display: flex;
+    margin-right: min(200px, 8vw);
+    padding-left: 7rem;
+    justify-content: space-between;
+    gap: 5rem;
+
+}
+.nav-links li a{
+    position: relative;
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: #e2e8f0;
+    transition: 0.3s;
+}
+.nav-links li a:hover{
+    color: #38bdf8;
+    text-shadow: 0 0 10px #38bdf8;
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.h1{
+    display: block;
+  overflow: hidden;
+  white-space: nowrap;
+ 
+  max-width: 100%;
+  animation: typing 2s steps(90, end) 0s forwards, blink 0.75s step-end infinite;
+  width: 0;
+}
+
+.lower-h1 {
+  display: block; /* Forces it to the next line */
+  margin-top: 10px;
+}
+
+/* Individual Letter Animation */
+.lower-h1 span {
+  opacity: 0;
+  display: inline-block;
+  animation: revealLetter 0.1s ease forwards;
+  /* Starts after the upper heading finishes (e.g., 2.5 seconds delay) */
+  animation-delay: calc(2.5s + (0.08s * var(--i)));
+}
+
+@keyframes revealLetter {
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+.container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: 0;
+  background-color: #020617;
+  justify-content: space-between;
+  gap: 3rem;
+  width: 300px;
+  height: 300px; 
+  padding-top: 100px;
+}
+.card{
+    column-span: 2;
+
+}
+.quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+       background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      
+    }
+h3{
+    color: #0f172a;
+    margin-bottom: 0.4rem;
+    font-weight: 300;
+
+    }
+p{
+    color: var(--muted);
+     font-size: 0.95rem;
+      margin-bottom: 1rem;
+      color: burlywood;
+      font-weight: 500;
+
+      
+}    
+.card{
+    width: 250px;
+      height: 250px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      background-color: white;
+      margin-left: auto;
+      margin-right: auto;
+} 
+.icon{
+    font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    
+}
+.announce{
+  color: darkblue;
+  text-align: left;
+  font-size: 30px;
+  
+}
+
+.announce-cont{
+  border-radius: 20px;
+  margin-left: 40px;
+  background-color: white;
+  width: 70%;
+  height: 400px;
+  gap: 40px;
+}
+.announce-list{grid-template-rows: 100px;
+  
+  
+  border-radius: 10px;
+  
+  background-color: darkblue;
+  display: grid;
+}
+/* ===== Box-style cards: CSS only =====
+   Works on your existing HTML: .quick-grid > .card > .icon, h3, p, .button
+   Paste this at the BOTTOM of sgh.css so it overrides the old card styles. */
+
+:root{
+  --box-navy:#0B1F8A;
+  --box-orange:#FF7A3D;
+  --box-icon:#FFB38A;
+}
+
+/* ---------- Grid ---------- */
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:1.5rem;
+  max-width:72rem;
+  margin:0 auto;
+  padding:2rem 1.25rem;
+}
+
+/* ---------- The box ---------- */
+.quick-grid .card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:.65rem;
+  padding:2.1rem 1.5rem 1.8rem;
+  background:var(--surface,#fff);
+  border:2px solid var(--border,#E3E7F0);
+  border-radius:18px;
+  overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.quick-grid .card::before{              /* orange bar that slides across on hover */
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:6px;
+  background:var(--box-orange);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s ease;
+}
+.quick-grid .card:hover{
+  transform:translate(-4px,-4px);
+  border-color:var(--box-navy);
+  box-shadow:6px 6px 0 var(--box-navy);
+}
+.quick-grid .card:hover::before{transform:scaleX(1)}
+
+/* ---------- Icon tile (the emoji is hidden, a line icon is drawn instead) ---------- */
+.quick-grid .card .icon{
+  width:72px;
+  height:72px;
+  display:grid;
+  place-items:center;
+  margin-bottom:.4rem;
+  border-radius:18px;
+  background:var(--box-navy);
+  color:var(--box-icon);
+  font-size:0;                          /* hides the emoji */
+  line-height:0;
+}
+.quick-grid .card .icon::before{
+  content:"";
+  width:36px;
+  height:36px;
+  background:currentColor;
+  -webkit-mask:var(--ic) center / contain no-repeat;
+          mask:var(--ic) center / contain no-repeat;
+}
+
+/* 1 = megaphone */
+.quick-grid .card:nth-child(1){--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 11 18-5v12L3 14v-3z'/%3E%3Cpath d='M11.6 16.8a3 3 0 1 1-5.8-1.6'/%3E%3C/svg%3E")}
+/* 2 = trophy */
+.quick-grid .card:nth-child(2){--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9H4.5a2.5 2.5 0 0 1 0-5H6'/%3E%3Cpath d='M18 9h1.5a2.5 2.5 0 0 0 0-5H18'/%3E%3Cpath d='M4 22h16'/%3E%3Cpath d='M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22'/%3E%3Cpath d='M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22'/%3E%3Cpath d='M18 2H6v7a6 6 0 0 0 12 0V2Z'/%3E%3C/svg%3E")}
+/* 3 = graduation cap */
+.quick-grid .card:nth-child(3){--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z'/%3E%3Cpath d='M22 10v6'/%3E%3Cpath d='M6 12.5V16a6 3 0 0 0 12 0v-3.5'/%3E%3C/svg%3E")}
+/* 4 = landmark */
+.quick-grid .card:nth-child(4){--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' x2='21' y1='22' y2='22'/%3E%3Cline x1='6' x2='6' y1='18' y2='11'/%3E%3Cline x1='10' x2='10' y1='18' y2='11'/%3E%3Cline x1='14' x2='14' y1='18' y2='11'/%3E%3Cline x1='18' x2='18' y1='18' y2='11'/%3E%3Cpolygon points='12 2 20 7 4 7'/%3E%3C/svg%3E")}
+
+/* ---------- Text and button ---------- */
+.quick-grid .card h3{
+  margin:0;
+  font-size:1.25rem;
+  line-height:1.25;
+}
+.quick-grid .card p{
+  margin:0 0 .6rem;
+  max-width:26ch;
+  line-height:1.55;
+  color:color-mix(in srgb, currentColor 70%, transparent);   /* darker than the old beige */
+}
+.quick-grid .card .button{
+  margin-top:auto;
+  padding:.7rem 1.3rem;
+  border:2px solid var(--box-navy);
+  border-radius:10px;
+  background:transparent;
+  color:var(--box-navy);
+  font-family:inherit;
+  font-size:.95rem;
+  font-weight:600;
+  line-height:1;
+  cursor:pointer;
+  transition:background .2s ease, color .2s ease;
+}
+.quick-grid .card .button:hover{background:var(--box-navy);color:#fff}
+.quick-grid .card .button:focus-visible{outline:3px solid var(--box-orange);outline-offset:3px}
+
+/* ---------- Scroll animation (pure CSS, Chrome and Edge) ----------
+   Each card rises and fades in as it scrolls into view, one after another.
+   The icon tile pops in a moment later. Other browsers just show the cards. */
+@supports (animation-timeline: view()) {
+  @keyframes card-rise{
+    from{opacity:0;translate:0 56px}
+    to{opacity:1;translate:0 0}
+  }
+  @keyframes icon-pop{
+    from{scale:.4;rotate:-14deg}
+    to{scale:1;rotate:0deg}
+  }
+
+  .quick-grid .card{
+    animation:card-rise linear both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 55%;
+  }
+  .quick-grid .card:nth-child(2){animation-range:entry 8% entry 63%}
+  .quick-grid .card:nth-child(3){animation-range:entry 16% entry 71%}
+  .quick-grid .card:nth-child(4){animation-range:entry 24% entry 79%}
+
+  .quick-grid .card .icon{
+    animation:icon-pop linear both;
+    animation-timeline:view();
+    animation-range:entry 20% entry 85%;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .quick-grid .card,
+  .quick-grid .card .icon{animation:none}
+  .quick-grid .card,
+  .quick-grid .card::before{transition:none}
+}
+
+/* ===== Latest announcements===== */
+
+:root{
+  --box-navy:#0B1F8A;
+  --box-orange:#FF7A3D;
+  --box-icon:#FFB38A;
+}
+
+/* ---------- Heading block ---------- */
+.announce{
+  max-width:72rem;
+  margin:0 auto;
+  padding:3.5rem 1.25rem .5rem;
+}
+.announce h2{
+  position:relative;
+  margin:0;
+  padding-bottom:1rem;
+  font-size:clamp(1.9rem,4.5vw,2.9rem);
+  line-height:1.1;
+  color:var(--box-navy);
+}
+.announce h2::after{                     /* short orange bar under the heading */
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:72px;
+  height:6px;
+  border-radius:3px;
+  background:var(--box-orange);
+}
+.announce p{
+  margin:1rem 0 0;
+  padding-left:0 !important;             /* replaces the inline padding-left: 20px */
+  max-width:46ch;
+  font-size:1.05rem;
+  line-height:1.6;
+  color:#4A5468;
+}
+
+/* ---------- Grid of boxes ---------- */
+.announce-cont{
+  --ic-mega:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 11 18-5v12L3 14v-3z'/%3E%3Cpath d='M11.6 16.8a3 3 0 1 1-5.8-1.6'/%3E%3C/svg%3E");
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.5rem;
+  max-width:72rem;
+  margin:0 auto;
+  padding:1.5rem 1.25rem 4rem;
+}
+
+/* ---------- Each box ---------- */
+.announce-cont .announce-list{
+  position:relative;
+  box-sizing:border-box;
+  width:auto;
+  max-width:none;
+  height:auto;
+  min-height:230px;
+  margin:0;
+  padding:1.6rem 1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+  background:var(--box-navy);
+  color:#fff;
+  border:2px solid var(--box-navy);
+  border-top:6px solid var(--box-orange);
+  border-radius:18px;
+  overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.announce-cont .announce-list:hover{
+  transform:translate(-4px,-4px);
+  box-shadow:6px 6px 0 var(--box-orange);
+}
+
+/* Empty box: shows a megaphone and a short message.
+   This disappears on its own once a box has content inside. */
+.announce-cont .announce-list:empty{
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.announce-cont .announce-list:empty::before{
+  content:"";
+  width:44px;
+  height:44px;
+  background:var(--box-icon);
+  -webkit-mask:var(--ic-mega) center / contain no-repeat;
+          mask:var(--ic-mega) center / contain no-repeat;
+}
+.announce-cont .announce-list:empty::after{
+  content:"New announcements will appear here";
+  max-width:18ch;
+  font-size:1rem;
+  line-height:1.4;
+  color:rgba(255,255,255,.85);
+}
+
+/* When you put content inside a box, these styles are ready */
+.announce-cont .announce-list h3{margin:0;font-size:1.2rem;line-height:1.3;color:#fff}
+.announce-cont .announce-list p{margin:0;line-height:1.55;color:rgba(255,255,255,.85)}
+.announce-cont .announce-list time,
+.announce-cont .announce-list .date{
+  align-self:flex-start;
+  padding:.2rem .65rem;
+  border-radius:6px;
+  background:var(--box-orange);
+  color:#14213D;
+  font-size:.85rem;
+  font-weight:600;
+}
+
+/* ---------- Scroll animation (pure CSS, Chrome and Edge) ---------- */
+@supports (animation-timeline: view()) {
+  @keyframes rise-in{
+    from{opacity:0;translate:0 56px}
+    to{opacity:1;translate:0 0}
+  }
+  .announce h2,
+  .announce p{
+    animation:rise-in linear both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 60%;
+  }
+  .announce-cont .announce-list{
+    animation:rise-in linear both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 55%;
+  }
+  .announce-cont .announce-list:nth-child(2){animation-range:entry 8% entry 63%}
+  .announce-cont .announce-list:nth-child(3){animation-range:entry 16% entry 71%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .announce h2,
+  .announce p,
+  .announce-cont .announce-list{animation:none;transition:none}
+}
+
+/* ---------- Fix for the cards above: darker, readable text ---------- */
+.quick-grid .card p{color:#4A5468}
+
+/* =====================================================================
+   ADDED: menu fits the screen + readable links over light backgrounds
+   ===================================================================== */
+nav{flex-wrap:wrap;row-gap:.5rem}               /* if the menu is ever too wide it wraps instead of being cut off */
+.nav-actions{flex-shrink:0}
+.icon-button{cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+
+/* site-effects.js adds .on-light to <nav> while the menu sits over a light background */
+nav.on-light .nav-links li a{color:#000}
+nav.on-light .nav-links li a:hover{color:#0B1F8A;text-shadow:none}
+nav.on-light .icon-button{color:#000;border-color:#475569}
+
+/* =====================================================================
+   ADDED: pinned / new announcement cards (built by the script in home.html)
+   ===================================================================== */
+.announce-cont .pin-card{background:#FDC83A;border-color:#FDC83A;border-top-color:var(--box-orange);color:#1B1B2F}
+.announce-cont .pin-card h3{color:#0B1F8A}
+.announce-cont .pin-card p{color:#1B1B2F}
+.pin-top{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+.pin-badge,.new-badge{font-size:.78rem;font-weight:700;padding:.3rem .75rem;border-radius:999px}
+.pin-badge{background:#0B1F8A;color:#fff}
+.new-badge{background:var(--box-orange);color:#fff}
+.pin-date,.new-date{font-size:.85rem;font-weight:600;opacity:.8}
+.pin-title,.new-title{margin:0;font-size:1.3rem;line-height:1.3}
+.pin-body,.new-body{flex:1;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.pin-footer{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-top:auto;padding-top:.8rem;border-top:1px dashed rgba(0,0,0,.25)}
+.new-footer{border-top-color:rgba(255,255,255,.3)}
+.pin-category,.new-category{font-size:.8rem;font-weight:700;padding:.25rem .75rem;border-radius:999px}
+.pin-category{background:rgba(255,255,255,.65);color:#0B1F8A}
+.new-category{background:rgba(255,255,255,.15);color:#fff}
+.pin-link,.new-link{font-size:.9rem;font-weight:700;text-decoration:none}
+.pin-link{color:#0B1F8A}
+.new-link{color:#FFB38A}
+.pin-link:hover,.new-link:hover{color:var(--box-orange)}
+.pin-empty{align-items:center;justify-content:center;text-align:center}
+.pin-empty-icon{font-size:2.2rem}
+.announce-cont .pin-empty p{margin:0}
+
+/* =====================================================================
+   ADDED: responsive (tablet and smartphone). Same order as on the PC.
+   ===================================================================== */
+@media (max-width:1200px){
+  nav{padding:.7rem 4%;min-height:0;gap:.5rem 1rem}
+  .logo{order:1;font-size:1.5rem}
+  .nav-actions{order:2}
+  .nav-links{order:3;flex:1 1 100%;margin:0;padding:0;gap:.5rem;justify-content:space-between;overflow-x:auto}
+  .nav-links li a{font-size:.95rem;white-space:nowrap}
+}
+
+@media (max-width:900px){
+  .hero{min-height:400px}
+  .quick-grid{grid-template-columns:repeat(2,1fr)}
+  .quick-grid .card{width:100%;height:auto;min-height:0}
+  .announce-cont{width:92%;height:auto;margin:0 auto;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+}
+
+@media (max-width:600px){
+  nav{padding:.6rem 3%;margin-bottom:1rem}
+  .logo{font-size:1.25rem}
+  .nav-links li a{font-size:.8rem}
+  .icon-button{min-width:38px;min-height:38px;padding:.4rem .6rem}
+
+  .hero{min-height:360px}
+  .hero-content{padding:2.5rem 0}
+  .hero h1{font-size:clamp(1.5rem,7.5vw,2.2rem)}
+  .hero p{font-size:1rem}
+  .h1{white-space:normal;width:100%;animation:none}   /* long title wraps instead of being cut off */
+
+  .quick-grid{gap:.8rem;padding:1rem .75rem}
+  .quick-grid .card{padding:1.2rem .8rem 1rem;border-radius:14px}
+  .quick-grid .card .icon{width:52px;height:52px;border-radius:14px}
+  .quick-grid .card .icon::before{width:26px;height:26px}
+  .quick-grid .card h3{font-size:1rem}
+  .quick-grid .card p{font-size:.82rem}
+  .quick-grid .card .button{padding:.55rem .9rem;font-size:.85rem}
+
+  .announce{padding:2rem 1rem .25rem}
+  .announce-cont{grid-template-columns:1fr;gap:1rem;padding:1rem .8rem 1.5rem;border-radius:16px}
+  .announce-cont .announce-list{min-height:180px}
+}
+
+@media (max-width:380px){
+  .nav-links li a{font-size:.72rem}
+  .logo{font-size:1.1rem}
+}

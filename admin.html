@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script src="./site-effects.js"></script>
+<title>Staff area | Your High School</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F7FB;--surface:#fff;--ink:#14213D;--muted:#5B6783;--line:#DCE2EE;--brand:#1F3FBF;--bad:#C62828;--ok:#0E8F6E;
+--display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"Public Sans",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1424;--surface:#172038;--ink:#EEF1FA;--muted:#A3AECB;--line:#2A3556;--brand:#7C95FF;--bad:#FF8A8A;--ok:#4CD3A8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.5 var(--body)}
+:focus-visible{outline:3px solid #FFC93C;outline-offset:2px}
+.wrap{max-width:56rem;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+h1,h2{font-family:var(--display);margin:0}
+h1{font-size:1.8rem}h2{font-size:1.3rem;margin-bottom:.8rem}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+label{display:block;font-weight:600;font-size:.9rem;margin:.8rem 0 .25rem}
+input,select,textarea{width:100%;padding:.6rem .75rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:7rem;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.check{display:flex;align-items:center;gap:.5rem;font-weight:500;margin:.8rem 1.5rem 0 0}
+.check input{width:auto}
+.checks{display:flex;flex-wrap:wrap}
+button{font:600 .95rem var(--body);padding:.6rem 1.1rem;border-radius:8px;border:1px solid var(--brand);background:var(--brand);color:#fff;cursor:pointer}
+@media (prefers-color-scheme:dark){button.primary{color:#0E1424}}
+button.ghost{background:transparent;color:var(--brand)}
+button.danger{background:transparent;color:var(--bad);border-color:var(--bad)}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.item{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;padding:.9rem 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0}
+.item h3{margin:0;font-size:1.05rem}
+.meta{color:var(--muted);font-size:.88rem}
+.badge{font-size:.78rem;font-weight:600;border:1px solid var(--line);border-radius:6px;padding:.05rem .4rem;margin-left:.3rem}
+.tabs{display:flex;gap:.5rem;margin-bottom:1rem}
+.msg{margin-top:.8rem;font-weight:600;min-height:1.4em}
+.msg.err{color:var(--bad)}.msg.good{color:var(--ok)}
+.login{max-width:24rem;margin:12vh auto 0}
+[hidden]{display:none!important}
+@media (max-width:34rem){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<!-- Login -->
+<section id="loginView" class="login panel">
+  <h1>Staff login</h1>
+  <form id="loginForm">
+    <label for="lu">Username</label><input id="lu" autocomplete="username" required>
+    <label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password" required>
+    <div class="actions"><button class="primary" type="submit">Log in</button></div>
+    <p class="msg err" id="loginMsg" role="alert"></p>
+  </form>
+</section>
+
+<!-- App -->
+<section id="appView" hidden>
+  <div class="bar">
+    <div><h1>Staff area</h1><div class="meta" id="who"></div></div>
+    <div class="actions" style="margin:0">
+      <button class="ghost" id="pwBtn" type="button">Change password</button>
+      <button class="ghost" id="logoutBtn" type="button">Log out</button>
+    </div>
+  </div>
+  <p class="msg" id="topMsg" role="status"></p>
+
+  <div class="tabs" id="tabs" hidden>
+    <button class="primary" data-tab="posts" type="button">Announcements</button>
+    <button class="ghost" data-tab="staff" type="button">Staff accounts</button>
+  </div>
+
+  <div id="postsTab">
+    <div class="panel">
+      <h2 id="formTitle">New announcement</h2>
+      <form id="postForm">
+        <label for="t">Title</label><input id="t" maxlength="120" required>
+        <div class="row">
+          <div><label for="c">Category</label>
+            <select id="c"><option>Academic</option><option>Events</option><option>Sports</option><option>General</option></select></div>
+          <div><label for="d">Date</label><input id="d" type="date" required></div>
+        </div>
+        <label for="b">Message</label><textarea id="b" maxlength="5000" required></textarea>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="pub" checked> Visible on the website</label>
+          <label class="check"><input type="checkbox" id="pin"> Pin as important notice</label>
+        </div>
+        <div class="actions">
+          <button class="primary" type="submit" id="saveBtn">Publish</button>
+          <button class="ghost" type="button" id="cancelBtn" hidden>Cancel edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel"><h2>Announcements</h2><div id="posts"></div></div>
+  </div>
+
+  <div id="staffTab" hidden>
+    <div class="panel">
+      <h2>Add a staff member</h2>
+      <form id="userForm">
+        <div class="row">
+          <div><label for="uf">Full name</label><input id="uf" required maxlength="80"></div>
+          <div><label for="uu">Username</label><input id="uu" required pattern="[A-Za-z0-9._-]{3,30}"></div>
+        </div>
+        <div class="row">
+          <div><label for="up">Temporary password (10+ characters)</label><input id="up" type="text" minlength="10" required autocomplete="off"></div>
+          <div><label for="ur">Role</label>
+            <select id="ur"><option value="publisher">Publisher (posts and edits own announcements)</option><option value="admin">Admin (everything)</option></select></div>
+        </div>
+        <div class="actions"><button class="primary" type="submit">Create account</button></div>
+      </form>
+    </div>
+    <div class="panel"><h2>Staff accounts</h2><div id="users"></div></div>
+  </div>
+</section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+let me = null, editingId = null;
+
+async function api(method, url, body){
+  const token = sessionStorage.getItem('token');
+  const res = await fetch(url, {
+    method,
+    headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: 'Bearer ' + token } : {}) },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 401 && token) { logout(); }
+  if (!res.ok) throw new Error(data.error || 'Request failed.');
+  return data;
+}
+function say(id, text, ok){ const m = $(id); m.textContent = text; m.className = 'msg ' + (ok ? 'good' : 'err'); }
+
+/* ----- Login / logout ----- */
+$('loginForm').onsubmit = async e => {
+  e.preventDefault();
+  try{
+    const r = await api('POST', '/api/login', { username: $('lu').value, password: $('lp').value });
+    sessionStorage.setItem('token', r.token);
+    $('lp').value = '';
+    start(r.user);
+  }catch(err){ say('loginMsg', err.message); }
+};
+function logout(){ sessionStorage.removeItem('token'); me = null; $('appView').hidden = true; $('loginView').hidden = false; }
+$('logoutBtn').onclick = logout;
+
+$('pwBtn').onclick = async () => {
+  const current = prompt('Current password:'); if (!current) return;
+  const next = prompt('New password (at least 10 characters):'); if (!next) return;
+  try{ await api('PATCH', '/api/me/password', { current, next }); say('topMsg', 'Password changed.', true); }
+  catch(err){ say('topMsg', err.message); }
+};
+
+async function boot(){
+  if (!sessionStorage.getItem('token')) return;
+  try{ start(await api('GET', '/api/me')); }catch{ logout(); }
+}
+function start(user){
+  me = user;
+  $('loginView').hidden = true; $('appView').hidden = false;
+  $('who').textContent = `${user.full_name} · ${user.role === 'admin' ? 'Admin' : 'Publisher'}`;
+  $('tabs').hidden = user.role !== 'admin';
+  $('d').value = new Date().toISOString().slice(0, 10);
+  showTab('posts'); loadPosts(); if (user.role === 'admin') loadUsers();
+}
+
+/* ----- Tabs ----- */
+function showTab(name){
+  $('postsTab').hidden = name !== 'posts'; $('staffTab').hidden = name !== 'staff';
+  document.querySelectorAll('#tabs button').forEach(b => b.className = b.dataset.tab === name ? 'primary' : 'ghost');
+}
+$('tabs').onclick = e => { if (e.target.dataset.tab) showTab(e.target.dataset.tab); };
+
+/* ----- Announcements ----- */
+async function loadPosts(){
+  const box = $('posts'); box.replaceChildren();
+  try{
+    const rows = await api('GET', '/api/admin/announcements');
+    if (!rows.length) { box.append(el('p', 'meta', 'Nothing here yet. Use the form above to post your first announcement.')); return; }
+    rows.forEach(a => {
+      const row = el('div', 'item'), info = el('div');
+      const h = el('h3', null, a.title);
+      if (a.pinned) h.append(el('span', 'badge', 'Pinned'));
+      if (!a.published) h.append(el('span', 'badge', 'Hidden'));
+      info.append(h, el('div', 'meta', `${a.category} · ${a.date}${a.author ? ' · by ' + a.author : ''}`));
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      if (me.role === 'admin' || a.author_id === me.id){
+        const ed = el('button', 'ghost', 'Edit'); ed.type = 'button'; ed.onclick = () => edit(a);
+        const del = el('button', 'danger', 'Delete'); del.type = 'button';
+        del.onclick = async () => {
+          if (!confirm(`Delete "${a.title}"? This can't be undone.`)) return;
+          try{ await api('DELETE', '/api/admin/announcements/' + a.id); say('topMsg', 'Deleted.', true); loadPosts(); }
+          catch(err){ say('topMsg', err.message); }
+        };
+        act.append(ed, del);
+      }
+      row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+function edit(a){
+  editingId = a.id;
+  $('t').value = a.title; $('c').value = a.category; $('d').value = a.date; $('b').value = a.body;
+  $('pub').checked = a.published; $('pin').checked = a.pinned;
+  $('formTitle').textContent = 'Edit announcement'; $('saveBtn').textContent = 'Save changes'; $('cancelBtn').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' }); $('t').focus();
+}
+function resetForm(){
+  editingId = null; $('postForm').reset(); $('d').value = new Date().toISOString().slice(0, 10); $('pub').checked = true;
+  $('formTitle').textContent = 'New announcement'; $('saveBtn').textContent = 'Publish'; $('cancelBtn').hidden = true;
+}
+$('cancelBtn').onclick = resetForm;
+$('postForm').onsubmit = async e => {
+  e.preventDefault();
+  const body = { title: $('t').value, category: $('c').value, date: $('d').value, body: $('b').value, published: $('pub').checked, pinned: $('pin').checked };
+  try{
+    if (editingId) { await api('PUT', '/api/admin/announcements/' + editingId, body); say('topMsg', 'Changes saved.', true); }
+    else { await api('POST', '/api/admin/announcements', body); say('topMsg', body.published ? 'Published.' : 'Saved as hidden.', true); }
+    resetForm(); loadPosts();
+  }catch(err){ say('topMsg', err.message); }
+};
+
+/* ----- Staff (admin only) ----- */
+async function loadUsers(){
+  const box = $('users'); box.replaceChildren();
+  try{
+    (await api('GET', '/api/admin/users')).forEach(u => {
+      const row = el('div', 'item'), info = el('div');
+      info.append(el('h3', null, u.full_name), el('div', 'meta', `${u.username} · ${u.role === 'admin' ? 'Admin' : 'Publisher'}`));
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      const rs = el('button', 'ghost', 'Reset password'); rs.type = 'button';
+      rs.onclick = async () => {
+        const password = prompt(`New password for ${u.full_name} (at least 10 characters):`); if (!password) return;
+        try{ await api('PUT', `/api/admin/users/${u.id}/password`, { password }); say('topMsg', 'Password reset.', true); }
+        catch(err){ say('topMsg', err.message); }
+      };
+      act.append(rs);
+      if (u.id !== me.id){
+        const del = el('button', 'danger', 'Remove'); del.type = 'button';
+        del.onclick = async () => {
+          if (!confirm(`Remove ${u.full_name}? They will lose access immediately.`)) return;
+          try{ await api('DELETE', '/api/admin/users/' + u.id); say('topMsg', 'Account removed.', true); loadUsers(); loadPosts(); }
+          catch(err){ say('topMsg', err.message); }
+        };
+        act.append(del);
+      }
+      row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+$('userForm').onsubmit = async e => {
+  e.preventDefault();
+  try{
+    await api('POST', '/api/admin/users', { full_name: $('uf').value, username: $('uu').value, password: $('up').value, role: $('ur').value });
+    $('userForm').reset(); say('topMsg', 'Account created. Give them the username and temporary password.', true); loadUsers();
+  }catch(err){ say('topMsg', err.message); }
+};
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Discussion board | አለታ ህዳሴ</title>
+<link rel="stylesheet" href="/levels.css">
+<script src="/site-effects.js"></script></head>
+<body class="lv-page" data-page="discuss">
+<header class="lv-top" id="lv-header"></header>
+<div class="lv-hero"><div class="lv-wrap"><h1>Discussion board</h1>
+<p>Work out questions together. Ask anything, answer a classmate, and get help from teachers. Be kind and explain your steps.</p></div></div>
+<main class="lv-wrap lv-block">
+  <div id="mode"></div>
+  <details class="lv-block" style="padding-top:0" open><summary style="cursor:pointer;font-weight:700;font-size:1.2rem;color:var(--lv-navy)">Ask a question</summary>
+    <form class="lv-form" id="ask" style="margin-top:12px">
+      <label>Title<input type="text" id="n-title" maxlength="120" required placeholder="For example: How do I find the maximum of a function?"></label>
+      <label>Details<textarea id="n-body" rows="4" maxlength="2000" required placeholder="What have you tried? Where are you stuck?"></textarea></label>
+      <div class="lv-row"><label>Subject<select id="n-subject"></select></label><label>Path<select id="n-level"></select></label></div>
+      <div class="lv-row"><label>Your name (optional)<input type="text" id="n-name" maxlength="40"></label>
+        <label class="inline" style="align-self:end"><input type="checkbox" id="n-anon"> Show me as Anonymous to other students</label></div>
+      <button class="lv-btn" type="submit" style="justify-self:start">Post question</button>
+      <p class="lv-err" id="ask-err" role="alert"></p><p class="lv-ok" id="ask-ok" role="status"></p>
+    </form></details>
+  <div class="lv-block"><h2>Questions</h2>
+    <div class="lv-row" style="grid-template-columns:1fr 1fr 2fr"><label>Subject<select id="f-subject"></select></label>
+      <label>Path<select id="f-level"></select></label><label>Search<input type="search" id="f-search" placeholder="Search questions"></label></div>
+    <div id="qlist" style="margin-top:16px"></div></div>
+  <details id="teacher-box" class="lv-block"><summary style="cursor:pointer;font-weight:700">Teacher? Open teacher tools</summary>
+    <form class="lv-form" id="teacher-form" style="margin-top:12px;max-width:420px"><label>Teacher code<input type="password" id="t-code" autocomplete="off"></label>
+      <button class="lv-btn" type="submit" style="justify-self:start">Turn on teacher mode</button><p id="t-msg" role="status"></p></form></details>
+</main>
+<footer class="lv-foot" id="lv-footer"></footer>
+<script src="/levels-data.js"></script><script src="/levels.js"></script></body></html>

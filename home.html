@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shool web</title>
+    <link rel="stylesheet" href="./sgh.css">
+       <link rel="stylesheet" href="levels.css">
+    <script src="./site-effects.js"></script>
+</head>
+<body>
+        
+    
+
+<header style=" position: sticky;
+      top: 0;
+      z-index: 100;
+      background: color-mix(in srgb, var(--surface) 94%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);">
+    <nav>
+        
+        <div class="logo">
+            አለታ <span style="color: darkgrey;">-ህዳሴ</span> </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./announcements.html">Announcement</a></li>
+            <li><a href="./achievement.html">Achivements</a></li>
+            <li><a href="./history.html">About</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+
+</ul>
+
+</div>
+<script src="site-effects.js"></script>
+
+    <div class="nav-actions">
+     <button id="theme-toggle" class="icon-button" type="button">☾</button>
+    </div>
+        
+
+   </nav>
+    </header>
+    <main id="main-content">
+        <section class="hero">
+        <div class="hero-content">
+            <h1 style="color: darkgrey;
+            "> <span class="h1"  style="color: coral;">እንኳን ወደ አለታ ህዳሴ ትምህርት</span> ቤት በደህና መጡ</h1>
+
+            <p>አለታ ህዳሴ ትምህርት ቤት ተማሪዎች እውቀታቸውን እንዲያሳድጉ፣
+          ችሎታቸውን እንዲያዳብሩ እና ለወደፊት ስኬት እንዲዘጋጁ
+          የሚያግዝ የትምህርት ተቋም ነው።</p>
+        </div>
+        </section>
+
+    
+     <section>
+        <div class="quick-grid">
+            <article class="card 1">
+                <div class="icon"></div>
+          <h3>Announcement</h3>
+          <p>Read the latest school news and important notices.</p>
+          <a style="text-decoration: none;" class="button" href="./announcements.html"> Announcements </a>
+
+         
+          
+        </article> 
+
+        <article class="card one">
+        <div class="icon"></div>
+        <h3>Achivements</h3>
+        <p>Explore our Achivements Here.</p>
+        <a style="text-decoration: none;" href="./achievement.html" class="button">Achivements</a>
+        
+        
+        </article>
+
+        <article class="card 1">
+        <div class="icon"></div>
+        <h3>G-12 special platform</h3>
+        <p>Access special preparatory student's platform.</p>
+        <a style="text-decoration: none;" href="./portal/students.html" class="button">Access</a>
+       
+        
+        </article>
+
+        <article class="card 1">
+        <div class="icon"></div>
+        <h3>About us</h3>
+        <p>Our history from begining up to now.</p>
+        <a style="text-decoration: none;" href="./history.html" class="button">History</a>
+       
+        </article>
+    </div>
+
+    </article>
+    </div>
+    </section>
+   <section>
+    <div class="announce">
+        <h2>Latest announcements</h2>
+        <p style="padding-left: 20px;">Stay informed about everything happening at አለታ ህዳሴ.</p>
+    </div>
+
+    <div class="announce-cont" id="pinned-announcements"></div>
+
+    
+
+<script>
+(async function loadAnnouncements() {
+    const box = document.getElementById('pinned-announcements');
+    if (!box) return;
+    const MAX = 3;
+
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
+        ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const fmtDate = v => { const d = new Date(v); return isNaN(d) ? '' :
+        d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }); };
+    const newestFirst = (a, b) => (new Date(b.date) - new Date(a.date)) || (b.id - a.id);
+
+    async function getAnnouncements() {
+        for (const url of ['/api/announcements', '/announcements']) {
+            try { const res = await fetch(url); if (res.ok) return await res.json(); } catch (e) {}
+        }
+        return [];
+    }
+
+    const placeholder = `
+        <div class="announce-list pin-empty">
+            <div class="pin-empty-icon">📢</div>
+            <p>New announcements<br>will appear here</p>
+        </div>`;
+
+    const pinnedCard = a => `
+        <article class="announce-list pin-card">
+            <div class="pin-top"><span class="pin-badge">📌 Pinned</span><span class="pin-date">${esc(fmtDate(a.date))}</span></div>
+            <h3 class="pin-title">${esc(a.title)}</h3>
+            <p class="pin-body">${esc(a.body)}</p>
+            <div class="pin-footer"><span class="pin-category">${esc(a.category)}</span>
+                <a class="pin-link" href="announcements.html">Read more →</a></div>
+        </article>`;
+
+    const newCard = a => `
+        <article class="announce-list new-card">
+            <div class="pin-top"><span class="new-badge">New</span><span class="new-date">${esc(fmtDate(a.date))}</span></div>
+            <h3 class="new-title">${esc(a.title)}</h3>
+            <p class="new-body">${esc(a.body)}</p>
+            <div class="pin-footer new-footer"><span class="new-category">${esc(a.category)}</span>
+                <a class="new-link" href="announcements.html">Read more →</a></div>
+        </article>`;
+
+    const all = await getAnnouncements();
+    const list = Array.isArray(all) ? all : [];
+    const isPinned = a => a.pinned === true || a.pinned === 1;
+
+    const cards = [
+        ...list.filter(isPinned).sort(newestFirst).map(pinnedCard),
+        ...list.filter(a => !isPinned(a)).sort(newestFirst).map(newCard)
+    ].slice(0, MAX);
+
+    while (cards.length < MAX) cards.push(placeholder);
+    box.innerHTML = cards.join('');
+})();
+</script>
+</section>
+
+<section class="lv-home">
+  <div class="lv-home-head">
+    <h2>Choose your learning path</h2>
+    <p>Every subject has three paths. Start where you are today and move forward at your own pace, with notes, practice plans and help from teachers.</p>
+  </div>
+  <div class="lv-home-grid">
+    <a class="lv-home-card" style="--c:#1f9d8a" href="level.html?level=foundation">
+      <span class="ic">🌱</span><h3>Foundation <span>· መሠረት</span></h3>
+      <p>አጫጭር እና ግልጽ በሆኑ እርምጃዎች ጠንካራ መሠረት ይገንቡ።</p><b>Start here →</b></a>
+    <a class="lv-home-card" style="--c:#ff7a3d" href="level.html?level=growth">
+      <span class="ic">📈</span><h3>Growth <span>· ዕድገት</span></h3>
+      <p>ክህሎትዎን፣ ፍጥነትዎን እና የፈተና አሰራር ስልትዎን ያጠናክሩ።</p><b>keep growing →</b></a>
+    <a class="lv-home-card" style="--c:#5b3fd1" href="level.html?level=excellence">
+      <span class="ic">🏆</span><h3>Excellence <span>· ልህቀት</span></h3>
+      <p>ሙሉ ብቃትን ያዳብሩ፣ ከበድ ያሉ ጥያቄዎችን ይወጡ እንዲሁም ሌሎችን ያግዙ።</p><b>Aim higher →</b></a>
+  </div>
+  <div class="lv-home-links">
+    <a href="levels.html">Find my path (1-minute check)</a>
+    <a class="alt" href="discuss.html">Discussion board</a>
+  </div>
+</section>
+    </main>
+<!-- ===== FOOTER: paste before </body> (CSS can go in your stylesheet) ===== -->
+<style>
+.site-footer{
+  --navy:#0e1a35; --navy-deep:#0a1328; --coral:#f08a5d; --sand:#c9b8a8; --white:#f4efe9;
+  background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
+  color:var(--sand);
+  border-top:4px solid var(--coral);
+  padding:56px 20px 0;
+  font-family:inherit;
+}
+.site-footer *{box-sizing:border-box}
+.footer-grid{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1.6fr 1fr 1.2fr 1fr;gap:36px;
+}
+.footer-brand h3{color:var(--coral);font-size:1.7rem;margin:0 0 10px}
+.footer-brand p{line-height:1.7;margin:0 0 18px;max-width:34ch}
+.site-footer h4{color:var(--white);font-size:1.05rem;margin:0 0 16px;padding-bottom:8px;position:relative}
+.site-footer h4::after{content:"";position:absolute;left:0;bottom:0;width:32px;height:3px;background:var(--coral);border-radius:2px}
+.site-footer ul{list-style:none;margin:0;padding:0}
+.site-footer li{margin-bottom:10px}
+.site-footer a{color:var(--sand);text-decoration:none;transition:color .2s,padding-left .2s}
+.site-footer ul a:hover{color:var(--coral);padding-left:6px}
+.site-footer a:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
+.footer-contact li{display:flex;gap:10px;line-height:1.5}
+.footer-contact span.icon{color:var(--coral);flex:none}
+.footer-social{display:flex;gap:10px;flex-wrap:wrap}
+.footer-social a{
+  border:1px solid rgba(240,138,93,.5);color:var(--coral);
+  padding:8px 14px;border-radius:999px;font-size:.9rem;
+}
+.footer-social a:hover{background:var(--coral);color:var(--navy)}
+.footer-bottom{
+  max-width:1100px;margin:44px auto 0;padding:20px 0;
+  border-top:1px solid rgba(201,184,168,.2);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:.9rem;
+}
+.footer-bottom a{color:var(--coral)}
+@media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+
+    <div class="footer-brand">
+      <h3>አለታ-ህዳሴ</h3>
+      <p>አለታ ህዳሴ ትምህርት ቤት፤ ዕውቀትን የምናዳብርበት፣ ችሎታን የምናሳድግበት እና ለወደፊት ስኬት የምንዘጋጅበት ቤታችን።</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a style="margin-left: 50px;" href="#" aria-label="Telegram">Telegram</a>
+        
+      </div>
+    </div>
+
+    <div>
+      <h4>Quick links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/announcement">Announcement</a></li>
+        <li><a href="/achievements">Achievements</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Contact · አድራሻ</h4>
+      <ul class="footer-contact">
+        <li><span class="icon">&#9679;</span><span>Aleta, Ethiopia</span></li>
+        <li><span class="icon">&#9679;</span><a href="tel:+251000000000">+251 000 000 000</a></li>
+        <li><span class="icon">&#9679;</span><a href="mailto:info@school.example">info@school.example</a></li>
+        <li><span class="icon">&#9679;</span><span>Mon to Fri, 8:00 am to 5:00 pm</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>For students</h4>
+      <ul>
+        <li><a href="#">Find my path</a></li>
+        <li><a href="#">Discussion board</a></li>
+        <li><a href="#">Exam results</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; 2026 አለታ ህዳሴ ትምህርት ቤት። መብቱ በህግ የተጠበቀ ነው።</span>
+    <a href="#top">Back to top &uarr;</a>
+  </div>
+</footer>    
+
+
+
+
+    
+</body>
+</html>

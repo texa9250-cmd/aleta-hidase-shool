@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Announcements | Your High School</title>
+<script src="./site-effects.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Public+Sans:wght@400;500;600&family=Noto+Sans+Ethiopic:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F7FB; --surface:#FFFFFF; --ink:#14213D; --muted:#5B6783; --line:#DCE2EE;
+  --brand:#1F3FBF; --brand-ink:#FFFFFF; --sun:#FFC93C; --urgent:#D93A3A;
+  --academic:#1F3FBF; --event:#0E8F6E; --sports:#E27A12; --general:#6B4FD3;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1424; --surface:#172038; --ink:#EEF1FA; --muted:#A3AECB; --line:#2A3556;
+    --brand:#7C95FF; --brand-ink:#0E1424; --academic:#7C95FF; --event:#4CD3A8; --sports:#FFA64D; --general:#B29DFF;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--body)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+
+/* Header */
+.top-bg{background:#1B2A5C}
+.top{background-color:rgba(255, 255, 255, 0.05);color:#FFFFFF}
+.top .wrap{padding-top:3.5rem;padding-bottom:4.5rem}
+.school{font:600 .95rem var(--body);opacity:.85;margin:0 0 .75rem}
+h1{font:800 clamp(2.4rem,7vw,4.5rem)/1 var(--display);letter-spacing:-.02em;margin:0}
+h1 span{display:block}
+.h-top{color:#FF6F61}
+.h-bottom{color:darkgray}
+.am{color:darkgray;font-family:"Noto Sans Ethiopic","Nyala","Abyssinica SIL",sans-serif;font-weight:800}
+.top p.sub{max-width:44ch;margin:1rem 0 0;opacity:.9}
+
+/* Controls overlap the header */
+.controls{margin-top:-2rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.9rem;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;box-shadow:0 6px 24px rgba(20,33,61,.08)}
+.search{flex:1 1 14rem;min-width:0;padding:.65rem .9rem;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{border:1px solid var(--line);background:transparent;color:var(--ink);padding:.45rem .9rem;border-radius:999px;font:500 .9rem var(--body);cursor:pointer;transition:background .15s,color .15s}
+.chip:hover{background:var(--bg)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* Pinned notice */
+.pinned{margin-top:2rem;background:var(--sun);color:#14213D;border-radius:14px;padding:1.5rem 1.5rem 1.6rem;position:relative}
+.pinned::before{content:"";position:absolute;top:-9px;left:1.6rem;width:18px;height:18px;border-radius:50%;background:var(--urgent);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.pinned h2{font:800 clamp(1.5rem,4vw,2.1rem)/1.15 var(--display);margin:.2rem 0 .5rem}
+.pinned p{margin:0;max-width:62ch}
+.pinned .meta{font-weight:600;font-size:.9rem;margin-bottom:.3rem}
+
+/* List */
+.list{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:.9rem}
+.item{display:grid;grid-template-columns:4.5rem 1fr;gap:1.1rem;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--general));border-radius:12px;padding:1.1rem 1.25rem}
+.date{text-align:center;line-height:1.1;font-family:var(--display)}
+.date b{display:block;font-size:2rem;font-weight:800}
+.date span{font-size:.9rem;color:var(--muted);font-weight:500}
+.item h3{font:700 1.25rem/1.25 var(--display);margin:0 0 .25rem}
+.tag{display:inline-block;font-size:.8rem;font-weight:600;color:var(--c);margin-bottom:.35rem}
+.item p{margin:0;color:var(--muted);max-width:68ch}
+.more{margin-top:.6rem;padding:0;border:0;background:none;color:var(--brand);font:600 .95rem var(--body);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.item.new .tag::after{content:" New";background:var(--urgent);color:#fff;border-radius:6px;padding:.05rem .4rem;margin-left:.4rem}
+.empty,.error{margin:2rem 0;padding:1.5rem;border:2px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted)}
+.empty button{margin-top:.5rem}
+footer{padding:3rem 0 3.5rem;color:var(--muted);font-size:.9rem}
+
+@media (max-width:30rem){
+  .item{grid-template-columns:1fr;gap:.4rem}
+  .date{text-align:left;display:flex;gap:.4rem;align-items:baseline}
+  .date b{font-size:1.3rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="top-bg">
+<header class="top">
+  <div class="wrap">
+    <p class="school">Your High School</p>
+    <h1><span class="h-top">What's happening</span><span class="h-bottom">at <span lang="am" class="am">አለታ-ህዳሴ</span></span></h1>
+    <p class="sub">News for teachers and students and from the office. Check here before you head out.</p>
+  </div>
+</header>
+</div>
+
+<main class="wrap">
+  <section class="controls" aria-label="Find announcements">
+    <input class="search" id="q" type="search" placeholder="Search announcements" aria-label="Search announcements">
+    <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+  </section>
+
+  <div id="pinned"></div>
+  <p id="status" class="empty" hidden></p>
+  <ul class="list" id="list" aria-live="polite"></ul>
+</main>
+
+<footer>
+  <div class="wrap"></div>
+</footer>
+
+<script>
+/* ---------- Config ----------
+   When your backend is ready, it should return JSON like:
+   [{ "id":1, "title":"...", "body":"...", "category":"Academic", "date":"2026-10-12", "pinned":false }]
+   Change API_URL to match your route. */
+const API_URL = "/api/announcements";
+const COLORS = { Academic:"var(--academic)", Events:"var(--event)", Sports:"var(--sports)", General:"var(--general)" };
+
+/* Sample data shown until the backend exists */
+const SAMPLE = [
+  {id:1,title:"Mid-term exams begin Monday",body:"Exams run from Monday to Friday. Bring a pen, your student ID and a calculator where allowed. Timetables are posted on each classroom door and outside the main office. Students who are ill should ask a parent to call the office before 8:00 a.m.",category:"Academic",date:"2026-10-12",pinned:true},
+  {id:3,title:"Science fair: submit your project title",body:"Teams of up to three can enter. Send your project title and team names to the science department by October 20. The fair takes place in the main hall on November 5.",category:"Academic",date:"2026-10-20"},
+  {id:4,title:"Parents' meeting on report cards",body:"Parents and guardians are invited to collect first-term progress reports and meet class teachers. Sessions are grouped by grade. Please arrive at your scheduled time.",category:"Events",date:"2026-10-24"},
+  {id:5,title:"Library hours extended during exams",body:"The library will stay open until 6:00 p.m. on weekdays through exam week. Quiet study only, and please return borrowed books on time.",category:"General",date:"2026-10-09"}
+];
+
+const $ = id => document.getElementById(id);
+let all = [], category = "All", query = "";
+const open = new Set();
+
+const fmt = d => {
+  const dt = new Date(d + "T00:00:00");
+  return { day: dt.getDate(), mon: dt.toLocaleString("en", {month:"short"}), full: dt.toLocaleDateString("en", {weekday:"long", month:"long", day:"numeric"}) };
+};
+const isNew = d => (Date.now() - new Date(d + "T00:00:00")) / 864e5 <= 3 && new Date(d) <= new Date();
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+function buildChips(){
+  const cats = ["All", ...new Set(all.map(a => a.category))];
+  const box = $("chips"); box.replaceChildren();
+  cats.forEach(c => {
+    const b = el("button", "chip", c); b.type = "button";
+    b.setAttribute("aria-pressed", c === category);
+    b.onclick = () => { category = c; buildChips(); render(); };
+    box.append(b);
+  });
+}
+
+function render(){
+  const q = query.trim().toLowerCase();
+  const rows = all
+    .filter(a => category === "All" || a.category === category)
+    .filter(a => !q || (a.title + " " + a.body).toLowerCase().includes(q))
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  const pin = rows.find(a => a.pinned);
+  const pBox = $("pinned"); pBox.replaceChildren();
+  if (pin){
+    const s = el("section", "pinned"); s.setAttribute("aria-label", "Important announcement");
+    s.append(el("div", "meta", "Important · " + fmt(pin.date).full), el("h2", null, pin.title), el("p", null, pin.body));
+    pBox.append(s);
+  }
+
+  const list = $("list"); list.replaceChildren();
+  const rest = rows.filter(a => a !== pin);
+  const status = $("status");
+  status.hidden = rows.length > 0;
+  if (!rows.length){
+    status.textContent = "No announcements match. Clear your search or choose All.";
+    return;
+  }
+  rest.forEach(a => {
+    const d = fmt(a.date), li = el("li", "item" + (isNew(a.date) ? " new" : ""));
+    li.style.setProperty("--c", COLORS[a.category] || COLORS.General);
+    const date = el("div", "date"); date.append(el("b", null, d.day), el("span", null, d.mon));
+    const body = el("div");
+    const long = a.body.length > 140, expanded = open.has(a.id);
+    const p = el("p", null, long && !expanded ? a.body.slice(0, 140).trimEnd() + "…" : a.body);
+    body.append(el("div", "tag", a.category), el("h3", null, a.title), p);
+    if (long){
+      const m = el("button", "more", expanded ? "Show less" : "Read more"); m.type = "button";
+      m.setAttribute("aria-expanded", expanded);
+      m.onclick = () => { expanded ? open.delete(a.id) : open.add(a.id); render(); m.focus; };
+      body.append(m);
+    }
+    li.append(date, body); list.append(li);
+  });
+}
+
+async function load(){
+  try{
+    const r = await fetch(API_URL, {headers:{Accept:"application/json"}});
+    if (!r.ok) throw new Error(r.status);
+    all = await r.json();
+  }catch(e){
+    all = []; /* could not reach the server */
+  }
+  buildChips(); render();
+}
+
+$("q").addEventListener("input", e => { query = e.target.value; render(); });
+load();
+</script>
+</body>
+</html>
